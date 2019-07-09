@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>linksMaker</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+    <!-- external css -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,500">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
+	
+    <!-- internal css -->
+	<style>
+	
+	 body{
+		font-family: "Roboto,Helvetica Neue",Helvetica,Arial,sans-serif; 
+	 }
+	 
+	 #container{
+		 padding-top: 20px;
+		 padding-left:50px;
+		 width:90%;
+	 }
+
+	#menu{
+		 padding-top: 20px;
+		 padding-left:20px;
+	 }
+	 
+	h5 {
+		color: #2e44b9;
+		font-weight: bold;
+		font-size: 24px;;
+	}
+	
+	/* ---------- */
+	
+	#bonds{
+		min-width:400px;
+		width : 50%;
+		min-height:410px;
+	}
+	 
+	 .lavender{
+		background-color:#E6E6FA;
+		padding: 5px 8px 2px 8px;
+		border-radius:2px;
+		min-width:300px;
+	 }
+	 
+a.btn-back:hover {
+	background-image: linear-gradient(to bottom,#ccc 0,#ddd 100%);
+}
+
+a.btn-back {
+	font-family: Tahoma, Calibri, Arial, sans-serif;
+	color : grey;
+	border-radius: 4px;
+	text-decoration: none;
+	border: 1px solid #ddd;
+	padding: 4px 8px 4px 8px;
+	margin:4px;
+	background-image: linear-gradient(to bottom,#fff 0,#eee 100%);
+}
+
+input[type=radio] {
+	font-size: 11px;
+	cursor: pointer;
+}
+
+	input[type=radio]:before {
+		background: white;
+		border: 2px solid #337ab7;
+		border-radius: 50%;
+		margin-top: -2px;
+		margin-right: 6px;
+		display: inline-block;
+		vertical-align: middle;
+		content: '';
+		width: 14px;
+		height: 14px;
+	}
+
+	input[type=radio]:checked:before {
+		background: #337ab7;
+		border-color: #337ab7;
+		box-shadow: inset 0px 0px 0px 2px #fff;
+	}
+	.choices{
+		display:inline-block;
+		margin-right:40px;
+	}
+	
+	.choices label{
+		font-weight:normal;
+		margin-left:4px;
+		margin-right:4px;
+		vertical-align:8%;
+	}
+	
+	.nice-group{
+		width:680px;
+		line-height: 16px;
+		padding:10px;
+		border:1px solid #ccc;
+		background-color:#fff
+		border-radius:5px;
+	}
+	.nice-group legend {
+		color: #337ab7;
+		width:120px;
+		font-size:14px !important;
+		border-bottom:none;
+		
+	}
+
+	</style>
+  </head>
+  <body>
+    <div id="menu">
+ 		<a class="btn-back" href="https://philippemarcmeyer.github.io/#jquery">Blog</a>
+		<a class="btn-back" href="https://github.com/PhilippeMarcMeyer/tableScroller">Repo</a>
+	</div>	
+  <div id="container">
+	 <div>
+ 		  <p></p>
+		  <p></p>
+		   
+	</div>
+	  
+<table id="tableScroller" class="table table-striped table-bordered table-responsive-md">
+<thead>
+<tr>
+<th data-prop="firstname" data-way="desc">First name</th>
+<th data-prop="lastname"  data-way="desc">Last name</th>
+<th data-prop="birthdate" data-way="desc">Birthdate</th>
+<th data-prop="langage"  data-way="desc">Language</th>
+</tr>
+</thead>
+<tbody>
+
+<tbody>
+</table>
+
+
+
+
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="./tableScroller.js"></script>
+	  
+	<script>  
+  let data =  [
+		{"id": "1","firstname": "Bjarne ","lastname": "Stroustrup","birthdate": "12-30-1950","langage": "C++","useit":"no"},
+		{"id": "2","firstname": "Denis","lastname": "Ritchie","birthdate": "09-09-1941","langage": "C","useit":"no"},
+		{"id": "3","firstname": "Kenneth","lastname": "Thompson","birthdate": "02-04-1943","langage": "Go","useit":"no"},
+		{"id": "4","firstname": "James","lastname": "Gosling","birthdate": "05-19-1955","langage": "Java","useit":"no"},
+		{"id": "5","firstname": "Brendan ","lastname": "Eich","birthdate": "07-04-1961","langage": "Javascript", "note":"my fav","useit":"yes"},
+		{"id": "6","firstname": "Guido","lastname": "Van Rossum","birthdate": "01-31-1956","langage": "Python","useit":"yes"},
+		{"id": "7","firstname": "Yukihiro","lastname": "Matsumoto","birthdate": "04-14-1965","langage": "Ruby","useit":"no"},
+		{"id": "8","firstname": "Roberto","lastname": "Lerusalimschy","birthdate": "05-21-1960","langage": "Lua","useit":"no"},
+		{"id": "9","firstname": "Rasmus","lastname": "Lerdorf","birthdate": "11-22-1968","langage": "Php","useit":"yes"},
+		{"id": "10","firstname": "Jean","lastname": "Ichbiah","birthdate": "03-25-1940","langage": "Ada","useit":"no"},
+		{"id": "11","firstname": "Anders","lastname": "Hejlsberg","birthdate": "01-01-1960","langage": "C#","useit":"yes"}
+];
+
+let myTable = $("#tableScroller").tableScroller("init",data);
+
+	 </script>  
+</html>
+
