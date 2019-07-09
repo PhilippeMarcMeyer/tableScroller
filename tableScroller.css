@@ -1,0 +1,10 @@
+        table th{
+            cursor:pointer;
+        }
+
+         table th[data-way]:after{
+            content: "\f0dc";
+            font-family: 'Font Awesome 5 Free';
+            float:right;
+        }
+		
