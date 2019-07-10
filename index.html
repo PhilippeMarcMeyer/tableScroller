@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>linksMaker</title>
+    <title>tableScroller</title>
 
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,9 +23,9 @@
 	 }
 	 
 	 #container{
-		 padding-top: 20px;
-		 padding-left:50px;
-		 width:90%;
+		 margin-top: 20px;
+		 margin-left:50px;
+		 position:relative;
 	 }
 
 	#menu{
@@ -36,7 +36,7 @@
 	h5 {
 		color: #2e44b9;
 		font-weight: bold;
-		font-size: 24px;;
+		font-size: 18px;;
 	}
 	
 	/* ---------- */
@@ -114,51 +114,68 @@ input[type=radio] {
  		<a class="btn-back" href="https://philippemarcmeyer.github.io/#jquery">Blog</a>
 		<a class="btn-back" href="https://github.com/PhilippeMarcMeyer/tableScroller">Repo</a>
 	</div>	
-  <div id="container">
-	 <div>
- 		  <p></p>
-		  <p></p>
-		   
+	
+
+<div id="container" style="width:70%;">
+    <h5>A little plugin to demonstrate how to add a scroll to an html table</h5>
+	<div style="margin-bottom:10px;">The width of the table is determined by the width of its parent : try to change the width of the parent container</div>
+	<table id="tableScroller" class="table table-striped table-bordered table-responsive-md">
+	<thead>
+	<tr>
+		<th data-prop="id" data-way="up">Id</th>
+		<th data-prop="firstname" data-way="up">First name</th>
+		<th data-prop="lastname"  data-way="up">Last name</th>
+		<th data-prop="birthdate" data-way="up">Birthdate</th>
+		<th data-prop="langage"  data-way="up">Language</th>
+		<th data-prop="useit"  data-way="up">I use it</th>
+	</tr>
+	</thead>
+	<tbody></tbody>
+	</table>
+	
+  <div id="enlarger" style="width:300px;padding:10px;">
+		<label for="containerWidth">parent div width (<span>70%</span>)</label>
+	    <input type="range" value="70" list="tickmarks" id="containerWidth" min="30" max="90">
+		<datalist id="tickmarks">
+		  <option value="30">
+		  <option value="40">
+		  <option value="50">
+		  <option value="60">
+		  <option value="70">
+		  <option value="80">
+		  <option value="90">
+		</datalist>
 	</div>
-	  
-<table id="tableScroller" class="table table-striped table-bordered table-responsive-md">
-<thead>
-<tr>
-<th data-prop="firstname" data-way="up">First name</th>
-<th data-prop="lastname"  data-way="up">Last name</th>
-<th data-prop="birthdate" data-way="up">Birthdate</th>
-<th data-prop="langage"  data-way="up">Language</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
+</div>
 
-
-
-
- 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
   <script src="./tableScroller.js"></script>
 	  
-	<script>  
+<script>  
   let data =  [
-		{"id": "1","firstname": "Bjarne ","lastname": "Stroustrup","birthdate":new Date(1950,11,30),"langage": "C++","useit":"no"},
-		{"id": "2","firstname": "Denis","lastname": "Ritchie","birthdate": new Date(1941,8,9),"langage": "C","useit":"no"},
-		{"id": "3","firstname": "Kenneth","lastname": "Thompson","birthdate": new Date(1943,3,2),"langage": "Go","useit":"no"},
-		{"id": "4","firstname": "James","lastname": "Gosling","birthdate": new Date(1955,4,19),"langage": "Java","useit":"no"},
-		{"id": "5","firstname": "Brendan ","lastname": "Eich","birthdate": new Date(1961,3,7),"langage": "Javascript", "note":"my fav","useit":"yes"},
-		{"id": "6","firstname": "Guido","lastname": "Van Rossum","birthdate":new Date(1956,0,31),"langage": "Python","useit":"yes"},
-		{"id": "7","firstname": "Yukihiro","lastname": "Matsumoto","birthdate": new Date(1965,3,14),"langage": "Ruby","useit":"no"},
-		{"id": "8","firstname": "Roberto","lastname": "Lerusalimschy","birthdate": new Date(1960,4,21),"langage": "Lua","useit":"no"},
-		{"id": "9","firstname": "Rasmus","lastname": "Lerdorf","birthdate": new Date(1968,10,22),"langage": "Php","useit":"yes"},
-		{"id": "10","firstname": "Jean","lastname": "Ichbiah","birthdate":new Date(1940,2,25),"langage": "Ada","useit":"no"},
-		{"id": "11","firstname": "Anders","lastname": "Hejlsberg","birthdate": new Date(1960,0,1),"langage": "C#","useit":"yes"}
+		{"id": 1,"firstname": "Bjarne ","lastname": "Stroustrup","birthdate":new Date(1950,11,30),"langage": "C++","useit":false},
+		{"id": 2,"firstname": "Denis","lastname": "Ritchie","birthdate": new Date(1941,8,9),"langage": "C","useit":false},
+		{"id": 3,"firstname": "Kenneth","lastname": "Thompson","birthdate": new Date(1943,3,2),"langage": "Go","useit":false},
+		{"id": 4,"firstname": "James","lastname": "Gosling","birthdate": new Date(1955,4,19),"langage": "Java","useit":false},
+		{"id": 5,"firstname": "Brendan ","lastname": "Eich","birthdate": new Date(1961,3,7),"langage": "Javascript", "note":"my fav","useit":true},
+		{"id": 6,"firstname": "Guido","lastname": "Van Rossum","birthdate":new Date(1956,0,31),"langage": "Python","useit":true},
+		{"id": 7,"firstname": "Yukihiro","lastname": "Matsumoto","birthdate": new Date(1965,3,14),"langage": "Ruby","useit":false},
+		{"id": 8,"firstname": "Roberto","lastname": "Lerusalimschy","birthdate": new Date(1960,4,21),"langage": "Lua","useit":false},
+		{"id": 9,"firstname": "Rasmus","lastname": "Lerdorf","birthdate": new Date(1968,10,22),"langage": "Php","useit":true},
+		{"id": 10,"firstname": "Jean","lastname": "Ichbiah","birthdate":new Date(1940,2,25),"langage": "Ada","useit":false},
+		{"id": 11,"firstname": "Anders","lastname": "Hejlsberg","birthdate": new Date(1960,0,1),"langage": "C#","useit":true}
 ];
 
 let myTable = $("#tableScroller").tableScroller("init",{"data":data,"options":{"tbodyHeight":"200px"}});
 
+$("#containerWidth").on("change",function(){
+	let percentage = $(this).val()+"%";
+	$("#container").css("width",percentage);
+	$("#enlarger span").text(percentage);
+	myTable.tableScroller("update",percentage);
+});
 	 </script>  
 </html>
 

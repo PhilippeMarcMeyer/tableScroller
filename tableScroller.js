@@ -7,7 +7,8 @@
 	let shownHeaders = [];
 	let $headers;
 	let userLang = navigator.language || navigator.userLanguage;
-	let thwidth;
+	let arrWidthsForTHs;
+	let mainWidth;
 	
 	this.renderDate = function(d) {
 		let options = {
@@ -53,6 +54,7 @@
         });
     },
 	this.draw = function(){
+		$(factory).hide();
 		let html = "";
 		data.forEach(function(x){
 			html+= "<tr>";
@@ -82,39 +84,41 @@
 							 
 			 let count = 0;
                 setTimeout(function () {
-                    let tdwidth = [];
+                    let arrWidthsForTDs = [];
 					
                     let $modelTR = $(factory).find("tbody tr:first");
 					let $headerTR = $(factory).find("thead tr:first");
 				
                     if ($modelTR.length == 1) {
+						//Setting the min-width of data columns
                         $modelTR.find("td").each(function (i) {
 							let w = $(this).outerWidth();
-                            tdwidth.push(w);
-							$(this).css("min-width",thwidth[i]);
+                            arrWidthsForTDs.push(w);
+							$(this).css("min-width",arrWidthsForTHs[i]);
                             count += w;
                         });
                        
-					   let tdwidthPercentage = [];
-					   tdwidth.forEach(function(x,i){
-						   tdwidthPercentage.push((x/count)*100 + "%" )
+					   let ratios = [];
+					   arrWidthsForTDs.forEach(function(x,i){
+						   ratios.push(x/count);
 					   });
 					   
                         if ($headerTR.length == 1) {
-                          $(factory).css("width",(count+20)+".px"); // 
+                          $(factory).css("width",(mainWidth+20) + ".px"); // mainWidth // (count+20)+".px"
                             $headerTR.find("th").each(function (i) {
-                              $(this).css("width", tdwidth[i]+".px");
-							  $(this).css("min-width",thwidth[i]);
+                              $(this).css("width", parseInt((ratios[i]*mainWidth))+".px");
+							  $(this).css("min-width",arrWidthsForTHs[i]);
                             });
                         }
 						
 						  $modelTR.find("td").each(function (i) {
-                              $(this).css("width", tdwidth[i]+".px");
+                              $(this).css("width", parseInt((ratios[i]*mainWidth))+".px");
                         });
                     }
+					$(factory).show();
                 }, 100);	
 		});
-		
+
 	},
 		$.fn.tableScroller = function(action,input) {
 		factory = this;
@@ -130,17 +134,30 @@
 						}
 					});
 				}
+				mainWidth = $(factory).parent().outerWidth()-20;
 				setListeners();
-				thwidth = [];
-				$(factory).find("thead").css({"display":"block","overflow-y": "hidden","font-size":"12px"});
+				arrWidthsForTHs = [];
+				$(factory).find("thead").css({"display":"block","overflow-y": "hidden"});
 				let $headerTR = $(factory).find("thead tr:first");
 					 if ($headerTR.length == 1) {
 			            $headerTR.find("th").each(function () {
-                            thwidth.push($(this).css("width"));
+                            arrWidthsForTHs.push($(this).css("width"));
                         });			 
 					 }
 
 				draw();
+				$(window).resize(function() {
+					mainWidth = $(factory).parent().outerWidth()-20;
+	                draw();
+	            });
+				return (factory);
+			}else if(action == "update"){
+				
+				mainWidth = $(factory).parent().outerWidth()-20;
+				if(input=="100%"){
+					mainWidth-=60;
+				}
+				draw();			
 			}
 		}
 }( jQuery ));

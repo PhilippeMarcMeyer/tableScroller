@@ -1,5 +1,6 @@
         table th{
             cursor:pointer;
+			user-select: none;
         }
 
          table th[data-way]:after{
