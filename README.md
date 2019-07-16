@@ -22,3 +22,6 @@ https://philippemarcmeyer.github.io/tableScroller/index.html
 
 let myTable = $("#tableScroller").tableScroller("init",{"data":data,"options":{"tbodyHeight":"200px"}});
 </pre>
+
+it's not perfect and sometimes the header is not aligned with the body...
+funny to investigate
