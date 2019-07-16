@@ -53,6 +53,7 @@
             }
         });
     },
+
 	this.draw = function(){
 		$(factory).hide();
 		let html = "";
@@ -83,40 +84,39 @@
 			}
 							 
 			 let count = 0;
-                setTimeout(function () {
-                    let arrWidthsForTDs = [];
-					
-                    let $modelTR = $(factory).find("tbody tr:first");
-					let $headerTR = $(factory).find("thead tr:first");
+           
+			let arrWidthsForTDs = [];
+			
+			let $modelTR = $(factory).find("tbody tr:first");
+			let $headerTR = $(factory).find("thead tr:first");
+		
+			if ($modelTR.length == 1) {
+				//Setting the min-width of data columns
+				$modelTR.find("td").each(function (i) {
+					let w = $(this).outerWidth();
+					arrWidthsForTDs.push(w);
+					$(this).css("min-width",arrWidthsForTHs[i]);
+					count += w;
+				});
+			   
+			   let ratios = [];
+			   arrWidthsForTDs.forEach(function(x,i){
+				   ratios.push(x/count);
+			   });
+			   
+				if ($headerTR.length == 1) {
+				  $(factory).css("width",(mainWidth+20) + ".px"); // mainWidth // (count+20)+".px"
+					$headerTR.find("th").each(function (i) {
+					  $(this).css("width", parseInt((ratios[i]*mainWidth))+".px");
+					  $(this).css("min-width",arrWidthsForTHs[i]);
+					});
+				}
 				
-                    if ($modelTR.length == 1) {
-						//Setting the min-width of data columns
-                        $modelTR.find("td").each(function (i) {
-							let w = $(this).outerWidth();
-                            arrWidthsForTDs.push(w);
-							$(this).css("min-width",arrWidthsForTHs[i]);
-                            count += w;
-                        });
-                       
-					   let ratios = [];
-					   arrWidthsForTDs.forEach(function(x,i){
-						   ratios.push(x/count);
-					   });
-					   
-                        if ($headerTR.length == 1) {
-                          $(factory).css("width",(mainWidth+20) + ".px"); // mainWidth // (count+20)+".px"
-                            $headerTR.find("th").each(function (i) {
-                              $(this).css("width", parseInt((ratios[i]*mainWidth))+".px");
-							  $(this).css("min-width",arrWidthsForTHs[i]);
-                            });
-                        }
-						
-						  $modelTR.find("td").each(function (i) {
-                              $(this).css("width", parseInt((ratios[i]*mainWidth))+".px");
-                        });
-                    }
-					$(factory).show();
-                }, 100);	
+				  $modelTR.find("td").each(function (i) {
+					  $(this).css("width", parseInt((ratios[i]*mainWidth))+".px");
+				});
+			}
+			$(factory).show();
 		});
 
 	},
