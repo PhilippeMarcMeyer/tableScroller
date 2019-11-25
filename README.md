@@ -1,4 +1,4 @@
-# FieldsLinker
+# TableScroller
 ## A little plugin to demonstrate how to make a simple html table sortable and scrollable
 ### The width of the table is determined by the width of its parent
 ### I also added a sort 
